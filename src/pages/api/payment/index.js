@@ -74,7 +74,9 @@ export default async function handler(req, res) {
                 const selectedAddressId = e.target.selectedAddressId.value;
                 const transferAddress = e.target.transferAddress.value;
 
-                const response = await fetch('http://localhost:3000/api/payment', {
+                const response = await fetch('${
+                  process.env.NEXT_PUBLIC_MAIN_URL
+                }/payment', {
                   method: 'POST',
                   headers: {
                     'Content-Type': 'application/json'

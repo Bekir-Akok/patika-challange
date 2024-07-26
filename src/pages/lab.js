@@ -52,7 +52,7 @@ export default function Lab() {
         {workshopId?.length === 1 && (
           <iframe
             className="w-full h-44 mt-10"
-            src={`http://localhost:3000/api/payment?workshopId=${workshopId[0]?._id}&amount=50`}
+            src={`${process.env.NEXT_PUBLIC_MAIN_URL}/payment?workshopId=${workshopId[0]?._id}&amount=50`}
           />
         )}
 

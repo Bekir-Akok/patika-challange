@@ -4,8 +4,10 @@ import { showNotification } from "@mantine/notifications";
 //local imports
 import { statusCode } from "@/utils/status-code";
 
+const { NEXT_PUBLIC_LOCAL_URL, NEXT_PUBLIC_MAIN_URL } = process.env;
+
 const axiosInstance = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_MAIN_URL,
+  baseURL: NEXT_PUBLIC_MAIN_URL,
   withCredentials: true,
 });
 
