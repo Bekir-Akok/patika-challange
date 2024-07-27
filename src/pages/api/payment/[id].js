@@ -19,7 +19,7 @@ export default async function handler(req, res) {
             .collection("payments")
             .findOne({ walletId: String(wallet._id) });
 
-          return { ...wallet, payment };
+          return !!payment && { ...wallet, payment };
         })
       );
 

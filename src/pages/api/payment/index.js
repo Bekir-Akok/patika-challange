@@ -110,7 +110,7 @@ export default async function handler(req, res) {
       const payment = await db.collection("payments").findOne({
         walletId: selectedAddressId,
         transferAddress,
-        amount,
+        amount: castNumber,
         status: "Pending",
       });
 

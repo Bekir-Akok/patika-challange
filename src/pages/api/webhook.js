@@ -19,30 +19,27 @@ export default async function handler(req, res) {
           address: notification.destinationAddress,
         });
 
-        const payment = await db.collection("payments").find({
+        const payment = await db.collection("payments").findOne({
           walletId: wallet._id,
           transferAddress: response.data.transaction.sourceAddress,
         });
 
-        const paymentId = payment.length > 0 && payment[0]._id;
-        const restAmount = payment.length > 0 && payment[0].restAmount;
-
         const status =
-          restAmount - Number(notification.amounts[0]) === 0
+          payment.restAmount - Number(notification.amounts[0]) <= 0
             ? "SUCCESS"
             : "MISSING_PAYMENT";
 
         await db.collection("payments").updateOne(
           {
-            _id: paymentId,
+            _id: payment._id,
           },
           {
             $set: {
               status,
-              restAmount: restAmount - Number(notification.amounts[0]),
+              restAmount: payment.restAmount - Number(notification.amounts[0]),
             },
           },
-          { upsert: true }
+          { upsert: false }
         );
       }
       res.status(200).json({ message: "Success" });
