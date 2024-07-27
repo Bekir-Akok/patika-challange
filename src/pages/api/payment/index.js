@@ -97,11 +97,13 @@ export default async function handler(req, res) {
     }
   } else if (req.method === "POST") {
     const { selectedAddressId, transferAddress, amount } = req.body;
+    const castNumber = Number(amount);
     try {
       await db.collection("payments").insertOne({
         walletId: selectedAddressId,
         transferAddress,
-        amount,
+        amount: castNumber,
+        restAmount: castNumber,
         status: "Pending",
       });
 

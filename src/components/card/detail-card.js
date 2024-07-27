@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Card,
   Text,
@@ -16,7 +16,6 @@ import { useForm } from "@mantine/form";
 import { useDisclosure, useClipboard } from "@mantine/hooks";
 import {
   IconChevronLeft,
-  IconPaywall,
   IconCurrencyDollar,
   IconPlus,
   IconDownload,
@@ -30,7 +29,7 @@ import { colors, networks } from "@/utils/constant";
 import CustomLoader from "../loader";
 import Error from "../error";
 import EmptyData from "../empty-data";
-import CustomButton from "../Button";
+import CustomButton from "../button";
 import { showNotification } from "@mantine/notifications";
 
 export default function DetailCard({
@@ -74,6 +73,15 @@ export default function DetailCard({
     }
   };
 
+  useEffect(() => {
+    if (clipboard.copied) {
+      showNotification({
+        message: "Copied",
+        color: "green",
+      });
+    }
+  }, [clipboard.copied]);
+
   const items = data?.map((item, i) => (
     <UnstyledButton
       key={item._id}
@@ -104,18 +112,28 @@ export default function DetailCard({
     </UnstyledButton>
   ));
 
-  clipboard.copied &&
-    showNotification({
-      title: "Copied",
-      color: "green",
-    });
-
   const code = `
-//paste this code into payment step
+import { useEffect } from "react";
+
+//paste this code into your payment step
 function Demo() {
-  return <iframe src="http://baseurl.com/api/
+
+  useEffect(() => {
+    const handleMessage = (event) => {
+      const res = event.data;
+      console.log("response ==>" , res.result)
+    };
+
+    window.addEventListener("message", handleMessage);
+
+    return () => {
+      window.removeEventListener("message", handleMessage);
+    };
+  }, []);
+
+  return <iframe src="https://patika-challange.vercel.app/api/
   payment?workshopId=${id}
-  &amount=shopping amount />;
+  &amount=YourAmount />;
 }`;
 
   return (

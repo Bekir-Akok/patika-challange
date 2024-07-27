@@ -13,6 +13,8 @@ const useGetPayments = (id) => {
   const { data, isLoading, isError, refetch } = useQuery({
     queryKey: ["getPayments", id],
     queryFn: callback,
+    enabled: () => !!id,
+
   });
 
   return {

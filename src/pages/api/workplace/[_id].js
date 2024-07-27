@@ -55,12 +55,3 @@ export default async function handler(req, res) {
     res.status(405).end(`Method ${req.method} Not Allowed`);
   }
 }
-
-//  ["ETH"]
-//  ["ETH-SEPOLIA"]
-//  ["AVAX"]
-//  ["AVAX-FUJI"]
-//  ["MATIC"]
-//  ["MATIC-AMOY"]
-//  ["SOL"]
-//  ["SOL-DEVNET"]

@@ -12,9 +12,14 @@ module.exports = {
           "0%, 100%": { transform: "scale(1) rotate(30deg)", opacity: "1" },
           "50%": { transform: "scale(1.1) rotate(30deg)", opacity: "0.5" },
         },
+        pulseAndScaleLeft: {
+          "0%, 100%": { transform: "scale(1) rotate(30deg)", opacity: "1" },
+          "50%": { transform: "scale(1.1) rotate(-30deg)", opacity: "0.5" },
+        },
       },
       animation: {
         pulseAndScale: "pulseAndScale 2s infinite",
+        pulseAndScaleLeft: "pulseAndScaleLeft 2s infinite",
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",

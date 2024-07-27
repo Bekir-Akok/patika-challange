@@ -30,12 +30,12 @@ function NavbarLink({ icon: Icon, label, active, onClick }) {
 const menus = [
   { icon: IconHome2, label: "App", destination: "/" },
   { icon: IconFlask2, label: "Lab", destination: "/lab" },
-  { icon: IconBrandCashapp, label: "Payments", destination: "/payments" },
   {
     icon: IconArrowsTransferDown,
     label: "Transfer",
     destination: "/transfer",
   },
+  { icon: IconBrandCashapp, label: "Payments", destination: "/payments" },
 ];
 
 export default function Navbar() {

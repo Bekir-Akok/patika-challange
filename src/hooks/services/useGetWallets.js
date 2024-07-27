@@ -13,6 +13,7 @@ const useGetWallets = (id) => {
   const { data, isLoading, isError, refetch } = useQuery({
     queryKey: ["getWallets", id],
     queryFn: callback,
+    enabled: () => !!id,
   });
 
   return {

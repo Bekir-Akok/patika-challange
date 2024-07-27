@@ -28,18 +28,17 @@ export default function Payments() {
         <WorkplaceSelectbox data={workplaces} setState={setSelectedWorkplace} />
       </div>
 
-      <Card
-        withBorder
-        radius="md"
-        miw={300}
-        mih={300}
-        className="my-16 flex flex-col justify-between items-center gap-4"
-      >
-        <Text c="dimmed" className="text-2xl text-center">
+      <Card withBorder radius="md" miw={300} mih={300} className="my-16">
+        <Text c="dimmed" className="text-2xl text-center !mb-10">
           * In this section, you can track your payments on a project basis
         </Text>
 
-        <TableArea data={paymentData} isError={isError} isLoading={isLoading} />
+        <TableArea
+          data={paymentData}
+          isError={isError}
+          isLoading={isLoading}
+          workshop={workshopId?.length}
+        />
       </Card>
     </div>
   );

@@ -1,14 +1,13 @@
 import { useState } from "react";
-import { ScrollArea, Table } from "@mantine/core";
+import { ScrollArea, Table, Text } from "@mantine/core";
 import cx from "clsx";
 
 //local imports
 import classes from "./table.module.css";
 import CustomLoader from "../loader";
 import Error from "../error";
-import EmptyData from "../empty-data";
 
-export function TableArea({ data, isError, isLoading }) {
+export function TableArea({ data, isError, isLoading, workshop }) {
   const [scrolled, setScrolled] = useState(false);
 
   const rows = data?.map((row) => (
@@ -42,12 +41,31 @@ export function TableArea({ data, isError, isLoading }) {
       <div className="flex items-center justify-center flex-col ">
         <CustomLoader isLoading={isLoading} isError={isError} />
         <Error isError={isError} data={data} />
-        <EmptyData
-          length={!(data?.length > 0)}
-          isLoading={isLoading}
-          isError={isError}
-          text={"You can use the Lab for create a payment"}
-        />
+
+        {!!workshop ? (
+          !(data?.length > 0) &&
+          !isLoading &&
+          !isError && (
+            <>
+              <Text className="!text-[120px]  animate-pulseAndScaleLeft">
+                ☝️
+              </Text>
+              <Text className="!text-xl">There is no payment yet</Text>
+              <Text c="dimmed" className="!text-sm">
+                * You can use the lab for create a payment
+              </Text>
+            </>
+          )
+        ) : (
+          <>
+            <Text className="!text-[120px]  animate-pulseAndScale">☝️</Text>
+            <Text className="!text-xl">Choose a workplace</Text>
+            <Text c="dimmed" className="!text-sm">
+              * If workplace doesnt exist, you can create one using the App
+              page.
+            </Text>
+          </>
+        )}
       </div>
     </ScrollArea>
   );
