@@ -32,8 +32,10 @@ export default async function handler(req, res) {
         await db.collection("payments").updateOne(
           { _id: payment._id },
           {
-            status,
-            restAmount: payment.restAmount - Number(notification.amounts[0]),
+            $set: {
+              status,
+              restAmount: payment.restAmount - Number(notification.amounts[0]),
+            },
           }
         );
       }
