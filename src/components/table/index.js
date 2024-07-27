@@ -1,13 +1,15 @@
 import { useState } from "react";
-import { ScrollArea, Table, Text } from "@mantine/core";
+import { ActionIcon, ScrollArea, Table, Text } from "@mantine/core";
 import cx from "clsx";
 
 //local imports
 import classes from "./table.module.css";
 import CustomLoader from "../loader";
 import Error from "../error";
+import { IconRotateClockwise } from "@tabler/icons-react";
+import { showNotification } from "@mantine/notifications";
 
-export function TableArea({ data, isError, isLoading, workshop }) {
+export function TableArea({ data, isError, isLoading, workshop, refetch, id }) {
   const [scrolled, setScrolled] = useState(false);
 
   const rows = data?.map((row) => (
@@ -21,9 +23,39 @@ export function TableArea({ data, isError, isLoading, workshop }) {
 
   return (
     <ScrollArea
-      h={300}
+      h={350}
       onScrollPositionChange={({ y }) => setScrolled(y !== 0)}
     >
+      <div className="mb-3 mr-2 flex justify-end">
+        <ActionIcon
+          disabled={!id}
+          onClick={() => {
+            refetch()
+              .then(() =>
+                showNotification({
+                  title: "Success",
+                  color: "lime",
+                  autoClose: 3000,
+                })
+              )
+              .catch(() =>
+                showNotification({
+                  title: "Failure",
+                  color: "red",
+                  autoClose: 3000,
+                })
+              );
+          }}
+          variant="filled"
+          aria-label="Settings"
+        >
+          <IconRotateClockwise
+            style={{ width: "70%", height: "70%" }}
+            stroke={1.5}
+          />
+        </ActionIcon>
+      </div>
+
       <Table miw={700}>
         <Table.Thead
           className={cx(classes.header, { [classes.scrolled]: scrolled })}
@@ -37,7 +69,6 @@ export function TableArea({ data, isError, isLoading, workshop }) {
         </Table.Thead>
         <Table.Tbody>{rows}</Table.Tbody>
       </Table>
-
       <div className="flex items-center justify-center flex-col ">
         <CustomLoader isLoading={isLoading} isError={isError} />
         <Error isError={isError} data={data} />

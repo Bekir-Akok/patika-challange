@@ -29,18 +29,15 @@ export default async function handler(req, res) {
             ? "SUCCESS"
             : "MISSING_PAYMENT";
 
-        await db.collection("payments").updateOne(
-          {
-            _id: payment._id,
-          },
-          {
-            $set: {
+        await db
+          .collection("payments")
+          .updateOne(
+            { _id: payment._id },
+            {
               status,
               restAmount: payment.restAmount - Number(notification.amounts[0]),
-            },
-          },
-          { upsert: false }
-        );
+            }
+          );
       }
       res.status(200).json({ message: "Success" });
     } catch (e) {

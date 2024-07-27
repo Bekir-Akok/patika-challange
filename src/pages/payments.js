@@ -20,7 +20,7 @@ export default function Payments() {
   });
 
   const id = workshopId?.length === 1 && workshopId[0]?._id;
-  const { data: paymentData, isError, isLoading } = useGetPayments(id);
+  const { data: paymentData, isError, isLoading, refetch } = useGetPayments(id);
 
   return (
     <div className="w-full h-full p-8 flex flex-col">
@@ -38,6 +38,8 @@ export default function Payments() {
           isError={isError}
           isLoading={isLoading}
           workshop={workshopId?.length}
+          refetch={refetch}
+          id={id}
         />
       </Card>
     </div>
