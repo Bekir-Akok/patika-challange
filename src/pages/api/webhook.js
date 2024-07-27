@@ -20,7 +20,7 @@ export default async function handler(req, res) {
         });
 
         const payment = await db.collection("payments").findOne({
-          walletId: wallet._id,
+          walletId: String(wallet._id),
           transferAddress: response.data.transaction.sourceAddress,
         });
 
@@ -29,15 +29,13 @@ export default async function handler(req, res) {
             ? "SUCCESS"
             : "MISSING_PAYMENT";
 
-        await db
-          .collection("payments")
-          .updateOne(
-            { _id: payment._id },
-            {
-              status,
-              restAmount: payment.restAmount - Number(notification.amounts[0]),
-            }
-          );
+        await db.collection("payments").updateOne(
+          { _id: payment._id },
+          {
+            status,
+            restAmount: payment.restAmount - Number(notification.amounts[0]),
+          }
+        );
       }
       res.status(200).json({ message: "Success" });
     } catch (e) {
