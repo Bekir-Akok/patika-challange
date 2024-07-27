@@ -18,4 +18,3 @@ export default function CustomButton({
     </Button>
   );
 }
-/* <IconPaywall className="w-5 h-5" /> */
