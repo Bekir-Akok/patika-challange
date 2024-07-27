@@ -22,7 +22,7 @@ import { colors } from "@/utils/constant";
 import CustomLoader from "../loader";
 import EmptyData from "../empty-data";
 import Error from "../error";
-import CustomButton from "../button";
+import CustomButton from "../Button";
 
 export default function CustomCard({ data, isLoading, isError, refetch }) {
   const [loading, setLoading] = useState(false);
