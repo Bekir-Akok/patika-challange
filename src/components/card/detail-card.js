@@ -29,7 +29,7 @@ import { colors, networks } from "@/utils/constant";
 import CustomLoader from "../loader";
 import Error from "../error";
 import EmptyData from "../empty-data";
-import CustomButton from "../button";
+import CustomButton from "../Button";
 import { showNotification } from "@mantine/notifications";
 
 export default function DetailCard({
