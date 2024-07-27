@@ -15,7 +15,7 @@ export default async function handler(req, res) {
           id: notification.id,
         });
 
-        const wallet = await db.collection("wallet").findOne({
+        const wallet = await db.collection("wallets").findOne({
           address: notification.destinationAddress,
         });
 
