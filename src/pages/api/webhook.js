@@ -21,16 +21,20 @@ export default async function handler(req, res) {
         const payments = await db
           .collection("payments")
           .find({
-            walletId: String(wallet._id),
+            walletId: String(wallet?._id),
             transferAddress: response.data.transaction.sourceAddress,
             restAmount: { $gt: 0 },
           })
           .toArray();
 
         let remainingAmount = Number(notification.amounts[0]);
+        const restPayments = payments.filter((payment) => {
+          return payment.restAmount === 0;
+        });
 
         for (const payment of payments) {
           if (remainingAmount <= 0) break;
+          if (restPayments?.length === 0) break;
 
           const amountToSettle = Math.min(payment.restAmount, remainingAmount);
 
@@ -40,7 +44,7 @@ export default async function handler(req, res) {
               : "MISSING_PAYMENT";
 
           await db.collection("payments").updateOne(
-            { _id: payment._id },
+            { _id: payment?._id },
             {
               $set: {
                 status,
