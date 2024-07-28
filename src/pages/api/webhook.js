@@ -27,7 +27,7 @@ export default async function handler(req, res) {
           })
           .toArray();
 
-        let remainingAmount = Number(notification.amounts[0]);
+        let remainingAmount = parseFloat(notification.amounts[0]);
         const totalRestAmount = payments.reduce(
           (acc, payment) => acc + payment.restAmount,
           0

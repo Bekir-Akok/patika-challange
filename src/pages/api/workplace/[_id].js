@@ -1,4 +1,5 @@
 import { ObjectId } from "mongodb";
+import { v4 as uuidv4 } from "uuid";
 //local imports
 import clientPromise from "@/lib/mongodb";
 import { circleDeveloperSdk } from "@/utils/helper";
@@ -28,12 +29,14 @@ export default async function handler(req, res) {
     }
   } else if (req.method === "POST") {
     const { network } = req.body;
+    const idempotencyKey = uuidv4();
     try {
       const response = await circleDeveloperSdk.createWallets({
         accountType: "SCA",
         blockchains: [network],
         count: 1,
         walletSetId: selectedShop.walletSetId,
+        idempotencyKey,
       });
 
       const { address, blockchain, createDate } = response.data.wallets[0];
