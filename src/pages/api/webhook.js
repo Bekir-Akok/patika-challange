@@ -15,6 +15,7 @@ export default async function handler(req, res) {
 
         const wallet = await db.collection("wallets").findOne({
           address: notification.destinationAddress,
+          blockchain: response.data.transaction.blockchain,
         });
 
         const payments = await db
