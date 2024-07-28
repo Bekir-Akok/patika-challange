@@ -41,19 +41,24 @@ export default function Lab() {
         withBorder
         radius="md"
         miw={300}
-        mih={300}
-        className="flex justify-center items-center my-16"
+        mih={550}
+        className="my-8 flex flex-col justify-between"
       >
-        <Text c="dimmed" className="text-2xl">
+        <Text c="dimmed" className="text-2xl text-center">
           * In this laboratory, you will see how the payment tool created for
           the workplace you choose works integratedly.
         </Text>
 
-        {workshopId?.length === 1 && (
+        {workshopId?.length === 1 ? (
           <iframe
-            className="w-full h-44 mt-10"
+            className="w-full h-full mt-4"
             src={`${process.env.NEXT_PUBLIC_MAIN_URL}/payment?workshopId=${workshopId[0]?._id}&amount=1`}
           />
+        ) : (
+          <div className="h-full flex flex-col items-center justify-center">
+            <Text className="!text-[150px] animate-pulseAndScale">☝️</Text>
+            <Text className="!text-2xl">Choose a workplace</Text>
+          </div>
         )}
 
         {result && (
