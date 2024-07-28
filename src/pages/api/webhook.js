@@ -29,7 +29,7 @@ export default async function handler(req, res) {
 
         let remainingAmount = Number(notification.amounts[0]);
         const restPayments = payments.filter((payment) => {
-          return payment.restAmount === 0;
+          return payment.restAmount !== 0;
         });
 
         for (const payment of payments) {
