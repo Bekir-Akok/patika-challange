@@ -11,16 +11,16 @@ The Payment Gateway aims to take on the role of today's virtual POS providers wi
 
 ### `used packages`
 
-*, -,+Next js + Page Router
-*, -,+Mongodb
+-Next js + Page Router
+-Mongodb
 -Axios
 -React Query
 -Mantine Ui
 
 ### `used concepts genaral`
 
--Next js - Api routes ,Next Middleware
--React custom hooks with react query
+- Next js - Api routes ,Next Middleware
+- React custom hooks with react query
 -Axios (axios instance and interceptor)
 
 ### `used concepts circle`
