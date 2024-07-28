@@ -6,9 +6,12 @@ export default async function handler(req, res) {
   const db = client.db("payment_gateway");
   if (req.method === "POST") {
     try {
-      const { notificationType, notification } = req.body;
+      const { notificationType, notification, notificationId } = req.body;
+      const isExistNotification = await db.collection("notifications").findOne({
+        notificationId,
+      });
 
-      if (notificationType === "transactions.inbound") {
+      if (notificationType === "transactions.inbound" && !isExistNotification) {
         const response = await circleDeveloperSdk.getTransaction({
           id: notification.id,
         });
@@ -44,6 +47,8 @@ export default async function handler(req, res) {
 
           const amountToSettle = Math.min(payment.restAmount, remainingAmount);
 
+          console.log(amountToSettle, payment.restAmount - amountToSettle);
+
           const status =
             payment.restAmount - amountToSettle <= 0
               ? "SUCCESS"
@@ -61,6 +66,10 @@ export default async function handler(req, res) {
 
           remainingAmount -= amountToSettle;
         }
+
+        await db.collection("notifications").insertOne({
+          notificationId,
+        });
       }
       res.status(200).json({ message: "Success" });
     } catch (e) {
