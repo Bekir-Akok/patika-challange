@@ -18,11 +18,13 @@ import { sendTransfer } from "@/services/transfer";
 
 const wallets = [
   {
+    name: "EURC",
     value: "0xaf9be9022668c2ae3adcc5a29c5d1c758bbc3c68",
     label: "ETH-SEPOLIA",
     walletId: "b8d1c84d-cf72-54bc-aed5-3ee4fba65cce",
   },
   {
+    name: "USDC",
     value: "0x6280af88d20fef12182ecf1f4b968222b2f7cb05",
     label: "MATIC-AMOY",
     walletId: "0780caf0-b075-5d6e-962e-68a873856b14",
@@ -46,6 +48,10 @@ export default function Transfer() {
   const { data, isError, isLoading } = useGetWalletBalance(
     form.values.myAddress?.walletId
   );
+
+  const selectedBalance = data?.filter(
+    (token) => token.token.name === form.values.myAddress?.name
+  )[0];
 
   const handleSubmit = async (values) => {
     setLoading(true);
@@ -105,7 +111,9 @@ export default function Transfer() {
               </Text>
             )}
             {!!data && !isError && !isLoading && (
-              <Text size="sm">USDC Balance: {data}</Text>
+              <Text size="sm">
+                {selectedBalance.token.name} Balance: {selectedBalance.amount}
+              </Text>
             )}
             <TextInput
               required

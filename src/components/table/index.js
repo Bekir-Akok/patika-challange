@@ -14,10 +14,11 @@ export function TableArea({ data, isError, isLoading, workshop, refetch, id }) {
 
   const rows = data?.map((row) => (
     <Table.Tr key={row._id}>
-      <Table.Td>{row?.payment?.transferAddress}</Table.Td>
-      <Table.Td>{row?.payment?.amount}</Table.Td>
+      <Table.Td>{row?.transferAddress}</Table.Td>
+      <Table.Td>{row?.amount}</Table.Td>
+      <Table.Td>{row?.restAmount}</Table.Td>
       <Table.Td>{row?.blockchain}</Table.Td>
-      <Table.Td>{row?.payment?.status}</Table.Td>
+      <Table.Td>{row?.status}</Table.Td>
     </Table.Tr>
   ));
 
@@ -63,6 +64,7 @@ export function TableArea({ data, isError, isLoading, workshop, refetch, id }) {
           <Table.Tr>
             <Table.Th>Transfer Address</Table.Th>
             <Table.Th>Amount</Table.Th>
+            <Table.Th>Rest Amount</Table.Th>
             <Table.Th>Network</Table.Th>
             <Table.Th>Status</Table.Th>
           </Table.Tr>

@@ -1,3 +1,4 @@
+import { ObjectId } from "mongodb";
 //local imports
 import clientPromise from "@/lib/mongodb";
 
@@ -8,18 +9,18 @@ export default async function handler(req, res) {
 
   if (req.method === "GET") {
     try {
-      const wallets = await db
-        .collection("wallets")
+      const payments = await db
+        .collection("payments")
         .find({ workshopId: id })
         .toArray();
 
       const data = await Promise.all(
-        await wallets.map(async (wallet) => {
-          const payment = await db
-            .collection("payments")
-            .findOne({ walletId: String(wallet._id) });
+        await payments.map(async (payment) => {
+          const wallet = await db
+            .collection("wallets")
+            .findOne({ _id: ObjectId(payment.walletId) });
 
-          return !!payment && { ...wallet, payment };
+          return { ...payment, ...wallet };
         })
       );
 

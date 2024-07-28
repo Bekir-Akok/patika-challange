@@ -1,13 +1,14 @@
 //local imports
 import { circleDeveloperSdk } from "@/utils/helper";
 
+const { ETH_TOKEN_ID, USDC_TOKEN_ID } = process.env;
 export default async function handler(req, res) {
-  const { myAddress, amount, transferAddress } = req.body;
+  const { myAddress, amount, transferAddress, blockchain } = req.body;
   if (req.method === "POST") {
     try {
       const response = await circleDeveloperSdk.createTransaction({
         walletId: myAddress,
-        tokenId: `${process.env.USDC_TOKEN_ID}`,
+        tokenId: blockchain === "MATIC-AMOY" ? USDC_TOKEN_ID : ETH_TOKEN_ID,
         destinationAddress: transferAddress,
         amounts: [amount],
         fee: {

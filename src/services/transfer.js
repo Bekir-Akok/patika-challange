@@ -8,6 +8,7 @@ export const sendTransfer = async (values) => {
   const body = {
     amount: String(amount),
     myAddress: myAddress.walletId,
+    blockchain: myAddress.label,
     transferAddress,
   };
 

@@ -9,11 +9,9 @@ export default async function handler(req, res) {
         id,
       });
 
-      const data = response.data.tokenBalances.filter(
-        (balance) => balance.token.name === "USDC"
-      )[0].amount;
-
-      res.status(200).json({ message: "Success", data });
+      res
+        .status(200)
+        .json({ message: "Success", data: response.data.tokenBalances });
     } catch (e) {
       console.error(e);
       return res.status(500).json({ message: "Internal Server Error" });
