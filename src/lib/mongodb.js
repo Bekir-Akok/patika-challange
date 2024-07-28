@@ -11,7 +11,6 @@ const options = {
   authSource: "admin",
   replicaSet: "atlas-7gta9t-shard-0",
   ssl: true,
-  appName: "PatikaCluster",
 };
 
 let client;

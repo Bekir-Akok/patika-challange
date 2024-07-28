@@ -47,8 +47,6 @@ export default async function handler(req, res) {
 
           const amountToSettle = Math.min(payment.restAmount, remainingAmount);
 
-          console.log(amountToSettle, payment.restAmount - amountToSettle);
-
           const status =
             payment.restAmount - amountToSettle <= 0
               ? "SUCCESS"
