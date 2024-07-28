@@ -24,6 +24,7 @@ export default async function handler(req, res) {
             walletId: String(wallet?._id),
             transferAddress: response.data.transaction.sourceAddress,
             restAmount: { $gt: 0 },
+            blockchain: response.data.transaction.blockchain,
           })
           .toArray();
 
