@@ -5,7 +5,14 @@ if (!process.env.MONGODB_URI) {
 }
 
 const uri = process.env.MONGODB_URI;
-const options = { useNewUrlParser: true, useUnifiedTopology: true };
+const options = {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  authSource: "admin",
+  replicaSet: "atlas-7gta9t-shard-0",
+  ssl: true,
+  appName: "PatikaCluster",
+};
 
 let client;
 let clientPromise;
