@@ -6,28 +6,28 @@ The Payment Gateway aims to take on the role of today's virtual POS providers wi
 
 ### `Features to be added later`
 
--Connecting to the client side wallet in iframe and making the payment instantly.
--Using Circle mint, the user can mint USDC with their credit card on the iframe screen and complete the payment with it.
+- Connecting to the client side wallet in iframe and making the payment instantly.
+- Using Circle mint, the user can mint USDC with their credit card on the iframe screen and complete the payment with it.
 
 ### `used packages`
 
--Next js + Page Router
--Mongodb
--Axios
--React Query
--Mantine Ui
+- Next js + Page Router
+- Mongodb
+- Axios
+- React Query
+- Mantine Ui
 
 ### `used concepts genaral`
 
 - Next js - Api routes ,Next Middleware
 - React custom hooks with react query
--Axios (axios instance and interceptor)
+- Axios (axios instance and interceptor)
 
 ### `used concepts circle`
 
--Circle dev. controlled wallets
--Circle transactionsans with dev. controlled wallets
--Circle webhook
+- Circle dev. controlled wallets
+- Circle transactionsans with dev. controlled wallets
+- Circle webhook
 
 ## How to use
 
