@@ -11,8 +11,8 @@ The Payment Gateway aims to take on the role of today's virtual POS providers wi
 
 ### `used packages`
 
--Next js + Page Router
--Mongodb
+*, -,+Next js + Page Router
+*, -,+Mongodb
 -Axios
 -React Query
 -Mantine Ui
